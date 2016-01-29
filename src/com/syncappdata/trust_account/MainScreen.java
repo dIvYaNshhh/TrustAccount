@@ -10,8 +10,8 @@ import java.net.URL;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import com.syncappdata.utils.Constant;
-import org.eclipse.swt.events.SelectionAdapter;
 
 public class MainScreen implements Constant {
 	public static String mFreeURL = "http://moodifyrelaxmelody.in/api/displaySounds.php";
@@ -28,7 +27,7 @@ public class MainScreen implements Constant {
 	String output = "Hi";
 	private Display display;
 	private ClientInformation clientInfo;
-	private HomeWindow homeWindow;
+	//private HomeWindow homeWindow;
 	private Composite contentPanel;
 	private StackLayout layout;
 
@@ -95,9 +94,9 @@ public class MainScreen implements Constant {
 		layout = new StackLayout();
 		contentPanel.setLayout(layout);
 		
-		homeWindow = new HomeWindow(contentPanel, SWT.RESIZE | SWT.FILL);
-		
-		layout.topControl = homeWindow;
+		//homeWindow = new HomeWindow(contentPanel, SWT.RESIZE | SWT.FILL);
+		clientInfo = new ClientInformation(contentPanel, SWT.NONE);
+		layout.topControl = clientInfo;
 		contentPanel.layout();
 		// setInnerSize();
 
@@ -172,6 +171,7 @@ public class MainScreen implements Constant {
 				// "Preference Press");
 
 				// clientInfo.setVisible(true);
+				new PreferrenceDialog(shell, SWT.CLOSE).open();
 				
 
 			}			
@@ -204,7 +204,7 @@ public class MainScreen implements Constant {
 
 	}
 
-	private void fetchData() {
+	public void fetchData() {
 
 		try {
 

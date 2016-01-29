@@ -122,17 +122,17 @@ public class ClientInformation extends Composite {
 		tblclmnSr.setText("Sr");
 
 		TableColumn tblclmnName = new TableColumn(table, SWT.NONE);
-		tblclmnName.setWidth(130);
+		tblclmnName.setWidth(170);
 		tblclmnName.setText("Name");
 
 		TableColumn tblclmnFile = new TableColumn(table, SWT.NONE);
-		tblclmnFile.setWidth(100);
+		tblclmnFile.setWidth(189);
 		tblclmnFile.setText("File#");
 
 		TableColumn tblclmnAtt = new TableColumn(table, SWT.NONE);
 		tblclmnAtt.setWidth(152);
 		tblclmnAtt.setText("Attorney");
-
+		
 	}
 
 	@Override
