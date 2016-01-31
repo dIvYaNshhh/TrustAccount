@@ -27,7 +27,7 @@ public class ClientInformation extends Composite {
 	 * @param style
 	 */
 	public ClientInformation(Composite parent, int style) {
-		super(parent, SWT.H_SCROLL | SWT.V_SCROLL);
+		super(parent, SWT.NONE);
 		setLayout(new GridLayout(1, false));
 
 		Group grpClientInformation = new Group(this, SWT.NONE);

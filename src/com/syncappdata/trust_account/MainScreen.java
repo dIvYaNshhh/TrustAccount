@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.syncappdata.utils.Constant;
 
@@ -31,16 +32,13 @@ public class MainScreen implements Constant {
 	private Composite contentPanel;
 	private StackLayout layout;
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
-	// public MainScreen (Display display){
-	// this.display = display;
-	// }
-	/**
-	 * @wbp.parser.entryPoint
-	 */
-	// public MainScreen(){}
+	
+	 public MainScreen (Display display){
+	 this.display = display;
+	 }
+	
+
+	 public MainScreen(){}
 	/**
 	 * Launch the application.
 	 * 
@@ -80,8 +78,7 @@ public class MainScreen implements Constant {
 	 */
 	protected void createContents() {
 		shell = new Shell(display);
-		// shell.setLayout(new FillLayout(SWT.HORIZONTAL));
-		// shell.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		shell.setImage(SWTResourceManager.getImage(LoginScreen.class, "/com/syncappdata/icons/app_icon.ico"));                                
 		shell.setText("Trust Account");
 		createInnerWindow();
 		createMenu();
@@ -171,7 +168,7 @@ public class MainScreen implements Constant {
 				// "Preference Press");
 
 				// clientInfo.setVisible(true);
-				new PreferrenceDialog(shell, SWT.CLOSE).open();
+				new PreferrenceDialog(shell, SWT.RESIZE|SWT.MAX|SWT.CLOSE).open();
 				
 
 			}			

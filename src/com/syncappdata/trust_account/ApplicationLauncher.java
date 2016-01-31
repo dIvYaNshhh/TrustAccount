@@ -9,7 +9,7 @@ public class ApplicationLauncher {
 
 	public ApplicationLauncher() {
 		Display display = new Display();
-		//mainScreen = new MainScreen(display);
+		mainScreen = new MainScreen(display);
 		LoginScreen loginScreen = new LoginScreen(display);
 		loginScreen.open();
 		while ((Display.getCurrent().getShells().length != 0)

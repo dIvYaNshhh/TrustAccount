@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class PreferrenceDialog extends Dialog {
 
@@ -31,7 +32,7 @@ public class PreferrenceDialog extends Dialog {
 	 */
 	public PreferrenceDialog(Shell parent, int style) {
 		super(parent, style);
-		setText("SWT Dialog");
+		setText("Preferences");
 	}
 
 	/**
@@ -56,6 +57,7 @@ public class PreferrenceDialog extends Dialog {
 	 */
 	private void createContents() {
 		shell = new Shell(getParent(), getStyle());
+		shell.setImage(SWTResourceManager.getImage(LoginScreen.class, "/com/syncappdata/icons/app_icon.ico"));
 		shell.setSize(711, 585);
 		shell.setText(getText());
 		shell.setLayout(new FillLayout(SWT.HORIZONTAL));

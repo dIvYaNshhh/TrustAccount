@@ -1,18 +1,17 @@
 package com.syncappdata.trust_account;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
 public class BackUpDialog extends Dialog {
 
@@ -26,7 +25,7 @@ public class BackUpDialog extends Dialog {
 	 */
 	public BackUpDialog(Shell parent, int style) {
 		super(parent, style);
-		setText("SWT Dialog");
+		setText("Backup & Restore Data");
 	}
 
 	/**
@@ -51,6 +50,7 @@ public class BackUpDialog extends Dialog {
 	 */
 	private void createContents() {
 		shell = new Shell(getParent(), getStyle());
+		shell.setImage(SWTResourceManager.getImage(LoginScreen.class, "/com/syncappdata/icons/app_icon.ico"));
 		shell.setSize(497, 111);
 		shell.setText(getText());
 		shell.setLayout(new FillLayout(SWT.HORIZONTAL));
@@ -59,13 +59,13 @@ public class BackUpDialog extends Dialog {
 		composite.setLayout(new GridLayout(3, true));
 		
 		Button btnBackup = new Button(composite, SWT.NONE);
-		btnBackup.setImage(SWTResourceManager.getImage(BackUpDialog.class, "/com/syncappdata/icons/deactive.ico"));
+		btnBackup.setImage(SWTResourceManager.getImage(BackUpDialog.class, "/com/syncappdata/icons/drive_backup.ico"));
 		btnBackup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		btnBackup.setText("BackUp");
 		
 		Button btnRestoreData = new Button(composite, SWT.NONE);
 		btnRestoreData.setAlignment(SWT.LEFT);
-		btnRestoreData.setImage(SWTResourceManager.getImage(BackUpDialog.class, "/com/syncappdata/icons/deactive.ico"));
+		btnRestoreData.setImage(SWTResourceManager.getImage(BackUpDialog.class, "/com/syncappdata/icons/drive_restore.ico"));
 		btnRestoreData.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnRestoreData.setText("Restore Data");
 		
@@ -76,7 +76,7 @@ public class BackUpDialog extends Dialog {
 				shell.dispose();
 			}
 		});
-		btnCloseButton.setImage(SWTResourceManager.getImage(BackUpDialog.class, "/com/syncappdata/icons/deactive.ico"));
+		btnCloseButton.setImage(SWTResourceManager.getImage(BackUpDialog.class, "/com/syncappdata/icons/dialog_cancel.ico"));
 		btnCloseButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		btnCloseButton.setText("Close");
 

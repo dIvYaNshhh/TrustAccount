@@ -2,45 +2,53 @@ package com.syncappdata.trust_account;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.syncappdata.utils.Constant;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class LoginScreen implements Constant{
 
 	protected Shell shell;
-	private Text user_name;
-	private Text password;
 	private Display display ;
+	private Text username;
+	private Text password;
 	public LoginScreen(Display display){
 		this.display = display;
 	}
+	
+	public LoginScreen(){}
 
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			LoginScreen window = new LoginScreen();
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			LoginScreen window = new LoginScreen();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Open the window.
 	 */
 	public void open() {
-		
+		if(display!=null){
+			display = Display.getDefault();
+		}
 		createContents();
 		shell.open();
 		shell.layout();
@@ -56,56 +64,66 @@ public class LoginScreen implements Constant{
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		shell.setText("SWT Application");
+		shell.setImage(SWTResourceManager.getImage(LoginScreen.class, "/com/syncappdata/icons/app_icon.ico"));
+		shell.setSize(550, 399);
+		shell.setText("Login");
+		shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		Label lblWelcomeToTrust = new Label(shell, SWT.NONE);
-		lblWelcomeToTrust.setFont(SWTResourceManager.getFont(".SF NS Text", 14, SWT.BOLD));
-		lblWelcomeToTrust.setBounds(128, 10, 197, 28);
-		lblWelcomeToTrust.setText("WelCome To Trust Account");
+		Composite composite = new Composite(shell, SWT.NONE);
+		composite.setLayout(new GridLayout(7, false));
 		
-		Label lblUsername = new Label(shell, SWT.NONE);
-		lblUsername.setBounds(141, 65, 66, 14);
-		lblUsername.setText("UserName :");
+		Label lblWelcomeAdmin = new Label(composite, SWT.NONE);
+		lblWelcomeAdmin.setFont(SWTResourceManager.getFont("Segoe UI Symbol", 13, SWT.BOLD));
+		GridData gd_lblWelcomeAdmin = new GridData(SWT.CENTER, SWT.CENTER, true, false, 7, 1);
+		gd_lblWelcomeAdmin.heightHint = 28;
+		lblWelcomeAdmin.setLayoutData(gd_lblWelcomeAdmin);
+		lblWelcomeAdmin.setText("Welcome  To Trust Account");
 		
-		user_name = new Text(shell, SWT.BORDER);
-		user_name.setBounds(213, 62, 108, 19);
+		Label lblUsername = new Label(composite, SWT.NONE);
+		lblUsername.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, true, false, 5, 1));
+		lblUsername.setText("UserName");
+		new Label(composite, SWT.NONE);
 		
-		Label lblPassword = new Label(shell, SWT.NONE);
-		lblPassword.setBounds(141, 93, 66, 14);
-		lblPassword.setText("Password   :");
+		username = new Text(composite, SWT.BORDER);
+		GridData gd_username = new GridData(SWT.LEFT, SWT.BOTTOM, true, false, 1, 1);
+		gd_username.widthHint = 111;
+		username.setLayoutData(gd_username);
 		
-		password = new Text(shell, SWT.BORDER);
-		password.setBounds(213, 90, 108, 19);
+		Label lblPassword = new Label(composite, SWT.NONE);
+		lblPassword.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 5, 1));
+		lblPassword.setText("Password");
+		new Label(composite, SWT.NONE);
 		
-		Button btnLogin = new Button(shell, SWT.NONE);
-		btnLogin.setBounds(186, 148, 94, 28);
-		btnLogin.setText("Login");
-		btnLogin.addSelectionListener(new SelectionListener() {
-			
-			public void widgetSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				confirmLogin(user_name,password);
-			}
-			
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+		password = new Text(composite, SWT.PASSWORD|SWT.BORDER);
+		GridData gd_password = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
+		gd_password.widthHint = 111;
+		password.setLayoutData(gd_password);
+	
+		
+		Button btnLogin = new Button(composite, SWT.NONE);
+		btnLogin.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				setLogin();
 			}
 		});
+		GridData gd_btnLogin = new GridData(SWT.CENTER, SWT.FILL, false, false, 7, 1);
+		gd_btnLogin.widthHint = 111;
+		btnLogin.setLayoutData(gd_btnLogin);
+		btnLogin.setText("Login");
 
 	}
-	
-	
-	private void confirmLogin(Text user,Text pass){
-		String username = user.getText();
-		String password = pass.getText();
-		
-		if(username.equals(password)){
+
+	private void setLogin(){
+		if(username.getText().equals(password.getText())){
+			shell.dispose();
 			ApplicationLauncher.mainScreen.open();
-			shell.close();
-		}else{
+			
+		}
+		else{
 			MessageDialog.openError(shell, "Error", "Your UserName or Password is incorrect!!");
 		}
 	}
+
 }
+
